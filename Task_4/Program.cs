@@ -34,35 +34,31 @@ void ModifyArray (int [,] array)
         {
             if (array [i,j] < min)
             {
+                min = array [i,j];
                 minI = i;
                 minJ = j;
             }
         }
     }
     Console.WriteLine($"minI = {minI}, minJ = {minJ}");
+    
     int [,] arr = new int [array.GetLength(0)-1, array.GetLength(1)-1];
-    for (int i = 0; i < arr.GetLength(0); i++)
+    int passVertical = 0;
+    for (int i = 0; i < array.GetLength(0); i++)
     {
-        bool found = false;
-        if (i == minI) found = true;
-        else
+        if (i != minI)
         {
-            if 
-            for (int j = 0; j < arr.GetLength(1); j++)
+            int passHorizontal = 0;
+            for (int j = 0; j < array.GetLength(1); j++)
             {
-                if (j == minJ) found = true;
-                
-                else
-                {
-                    if (found == false) arr[i,j] = array [i,j];
-                    else arr[i,j] = array [i+1,j+1];
-                }
+                if (j != minJ) arr[i-passVertical,j-passHorizontal] = array[i,j];
+                else passHorizontal++;
             }
         }
+        else passVertical++;
     }
     PrintArray(arr);
 }
-
 
 void PrintArray(int[,] array)
 {
